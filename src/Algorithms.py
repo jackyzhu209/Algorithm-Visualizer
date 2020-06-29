@@ -1,6 +1,6 @@
 import heapq
 
-def deapthfirstsearch(graph, startNode, endNode):
+def depthfirstsearch(graph, startNode, endNode):
     stack = []
     visited = set([])
     path = []
