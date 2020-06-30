@@ -1,5 +1,5 @@
 body{
-    background-image: url('algoweb.jpg');
+    /*background-image: url('algoweb.jpg');*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -35,4 +35,9 @@ nav a{
 }
 .container p{
     line-height: 200px;
+}
+#cy{
+    height: 500px;
+    width: 500px;
+
 }

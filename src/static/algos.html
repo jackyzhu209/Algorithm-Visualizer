@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><link rel="shortcut icon" href="">
 <meta charset="UTF-8"><link rel = "stylesheet" href = "static/stylesheet.css">
 <title>Algorithm Visualizer</title>
+    <script type = application/javascript src = "cytoscape.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.1/cytoscape.min.js"></script>
 </head>
 
 
-<body>
-<script src = "static/cytoscape.js"></script>
+<body onload = cyto()>
 <!-- Header -->
 <div class="fixed-header">
   <div id = "header" class="container">
@@ -19,15 +20,14 @@
             <a href="#contact">Contact</a>
 	</nav>
     </div>
-  </div>
 </div>
 
 <!-- Body -->
-<div style="background-image: url('algoweb.jpg');">
-</div>
+<!--<div style="background-image: url('algoweb.jpg')">
+</div>-->
+<div id = "cy"></div>
 
-  <div class="bodytext"> Algorithm Visualizer>
-      <button id = "testbutton" type="button" onclick = "test()">change header button</button>
+  <div class="bodytext"> Algorithm Visualizer
   </div>
 
 

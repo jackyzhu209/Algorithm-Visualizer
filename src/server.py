@@ -9,7 +9,7 @@ def homepage():
 
 
 @app.route('/<path:filename>')
-def staticfile(filename):
+def static_file(filename):
     return send_from_directory('static', filename)
 
 
