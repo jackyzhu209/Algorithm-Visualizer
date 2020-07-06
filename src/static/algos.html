@@ -1,38 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head><link rel="shortcut icon" href="">
-<meta charset="UTF-8"><link rel = "stylesheet" href = "static/stylesheet.css">
+<head>
+<meta charset="UTF-8"><link rel = "stylesheet" href = "stylesheet.css">
 <title>Algorithm Visualizer</title>
-    <script type = application/javascript src = "cytoscape.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.1/cytoscape.min.js"></script>
+  <script type = application/javascript src = "cytoscape.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.1/cytoscape.min.js"></script>
 </head>
-
-
 <body onload = cyto()>
+
 <!-- Header -->
 <div class="fixed-header">
-  <div id = "header" class="container">
+  <div class="container">
 	<nav>
-            <a href="#home"><b>Algorithm Visualizer</b></a>
-            <a href="#projects">Our Projects</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
+            <li><a href="#home" ><b>Algorithm Visualizer</b></a>
+            <li style = "float:right"><a href="#projects" >Contacts</a>
+            <li style = "float:right"><a href="#about" >About Us</a>
+            <li style = "float:right"><a href="#contact" >Our Projects</a>
 	</nav>
     </div>
-</div>
-
-<!-- Body -->
-<!--<div style="background-image: url('algoweb.jpg')">
-</div>-->
-<div id = "cy"></div>
-
-  <div class="bodytext"> Algorithm Visualizer
   </div>
 
 
+<!-- Body -->
+<div style="background-image: url('algoweb.jpg');">
+</div>
+<div id = "cy"></div>
+  <div class="bodytext"> Algorithm Visualizer
+  </div>
+
+<div class="submittext">
+  <form action="/action_page.php">
+  <div class="row">
+    <div class="col-25">
+      <label for="V">Vertices</label>
+    </div>
+    <div class="col-50">
+      <input type="text" id="V" name="Vertices" placeholder="Enter Vertices...">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="E">Edges</label>
+    </div>
+    <div class="col-50">
+      <input type="text" id="E" name="Edges" placeholder="Enter Edges...">
+    </div>
+  </div>
+  <div class="row">
+      <input type="submit" value="Submit Vertices and Edges">
+  </div>
+  </form>
+</div>
+
 <div class="fixed-footer">
-	<div class="container"> Summer 2020 Algorithm Project 
+	<div class="container"> 
+		<nav>
+			<li><b>Summer 2020 Algorithm Project</b>
+		</nav>
 	</div>
 </div>
 </body>

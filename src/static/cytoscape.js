@@ -11,6 +11,11 @@ function cyto(){
                     data: {id: 'b'},
                     position: {x:200, y:200}
                 }
+            ],
+            edges: [
+                {
+                    data: {id: 'a-b', source: 'a', target: 'b'},
+                }
             ]
         },
         layout: {
@@ -24,7 +29,9 @@ function cyto(){
                     'label': 'data(id)'
                 }
             }
-        ]
+        ],
+        wheelSensitivity: 0.1,
+        panningEnabled: true
     })
 
 }
