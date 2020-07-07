@@ -84,6 +84,26 @@ input[type=submit]:hover {
     margin-top: 10px;
 }
 
+.button {
+	border: none;
+  	color: white;
+  	padding: 15px 15px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+  	margin: 10px 2px;
+  	cursor: pointer;
+	}
+
+	.buttonV {
+	background-color: #4CAF50;
+	}
+
+	.buttonE {
+	background-color: #4CAF50;
+	}
+
 
 @media screen and (max-width: 600px) {
     .col-25, .col-50, input[type=submit] {
