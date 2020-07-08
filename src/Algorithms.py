@@ -1,4 +1,14 @@
 import heapq
+import urllib.request
+
+
+graph = [[]]
+labelNames = dict()
+
+
+def updateGraph():
+    return
+
 
 def depthfirstsearch(graph, startNode, endNode):
     stack = []
