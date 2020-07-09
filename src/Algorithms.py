@@ -1,13 +1,38 @@
 import heapq
-import urllib.request
+import json
 
 
-graph = [[]]
-labelNames = dict()
+graph = [[0, 1], [1, 0]]
+vertexNumber = {"a": 0, "b" : 1}  # in the format "id" -> number
+vertexNames = {0 : "a", 1 : "b"}  # in the format number -> "id"
+# need first dictionary to keep the graph an adjacency matrix
 
 
-def updateGraph():
-    return
+def updateGraph(data):
+    parsed = json.loads(data)
+    data = parsed["data"]
+
+    if parsed["Type"] == "V":
+        label = data["id"]
+        vertexNumber[label] = len(vertexNumber)
+        vertexNames[len(vertexNames)] = label
+        graph.append([])
+        for n in range(0, len(graph)):
+            graph[len(graph)-1].append(0)
+        for arrays in range(0, len(graph)-1):
+            graph[arrays].append(0)
+
+    elif parsed["Type"] == "E":
+        label = data["id"]
+        source = vertexNumber[data["source"]]
+        target = vertexNumber[data["target"]]
+        graph[source][target] = label
+
+    print(graph)
+    print(vertexNames.items())
+    print(data)
+
+    return "200"
 
 
 def depthfirstsearch(graph, startNode, endNode):

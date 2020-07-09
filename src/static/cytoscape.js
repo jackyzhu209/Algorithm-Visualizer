@@ -44,19 +44,33 @@ function addedge(){
     var esource = document.getElementById('S');
     var etarget = document.getElementById('T');
 
-    var json = JSON.stringify({"Type": "E", "data": {"label": elabel.innerText, "source": esource.innerText, "target": etarget.innerText}})
+    var json = JSON.stringify({"Type": "E", "data": {"id": elabel.value, "source": esource.value, "target": etarget.value}});
 
-    cy.add({group: 'edges', data: {id: JSON.stringify(elabel.innerText), source: JSON.stringify(esource.innerText), target: JSON.stringify(etarget.innerText)}});
+    cy.add({group: 'edges', data: {id: elabel.value, source: esource.value, target: etarget.value}});
 
-    elabel.innerText = "";
-    esource.innerText = "";
-    etarget.innerText = "";
+    elabel.value = "";
+    esource.value = "";
+    etarget.value = "";
 
-    return json
+    var xhttps = new XMLHttpRequest()
+    xhttps.open("POST", '/updateGraph');
+    xhttps.send(json)
 }
 
 function addvertex(){
+    var vlabel = document.getElementById('V');
 
+    var json = JSON.stringify({"Type": "V", "data": {"id": vlabel.value}});
+
+    console.log(json);
+
+    cy.add({group: "nodes", data: {id: vlabel.value}});
+
+    vlabel.value = "";
+
+    var xhttps = new XMLHttpRequest();
+    xhttps.open("POST", "/updateGraph");
+    xhttps.send(json)
 }
 
 

@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 import Algorithms
 
 app = Flask(__name__)
@@ -17,6 +17,13 @@ def static_file(filename):
 @app.route('/images/<path:image>')
 def images(image):
     return send_from_directory('images', image)
+
+
+@app.route('/updateGraph', methods=['POST'])
+def update():
+    data = request.data
+    print(data)
+    return Algorithms.updateGraph(data)
 
 
 if __name__ == "__main__":
