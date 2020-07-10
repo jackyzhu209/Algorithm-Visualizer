@@ -31,33 +31,23 @@
 
 <div class="submittext">
   <form action="/action_page.php">
-  <div class="row">
     <div class="col-25">
-      <label for="V">Vertices</label>
-    </div>
-    <div class="col-50">
-      <input type="text" id="V" name="Vertices" placeholder="Enter Vertice IDs..." value = "">
-    </div>
-  </div>
-  <div class="row">
-      <button type = "button" class="button buttonV" onclick = addvertex()>Submit Vertices</button>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="E">Edges</label>
-    </div>
-    <div class="col-50">
-      <input type="text" id="E" name="Edges" placeholder="Enter Edge IDs...">
-    </div>
-    <div class="col-50">
+      <label for="V">Vertice</label>
+<br>
+
+      <input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs...">
+<br>
+      <button class="button buttonV">Submit Vertice</button>
+<br>
+      <label for="E">Edge</label>
+<br>
+      <input type="text" id="W" name="Weight" placeholder="Enter Edge Weight...">
+<br>
       <input type="text" id="S" name="Source" placeholder="Enter Edge Source...">
-    </div>
-    <div class="col-50">
+<br>
       <input type="text" id="T" name="Target" placeholder="Enter Edge Target...">
-    </div>
-  </div>
-  <div class="row">
-      <button type = "button" class="button buttonE" onclick = addedge()>Submit Edges</button>
+<br>
+      <button class="button buttonE">Submit Edge</button>
   </div>
   </form>
 </div>
