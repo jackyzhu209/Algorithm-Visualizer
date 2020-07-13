@@ -27,4 +27,4 @@ def update():
 
 
 if __name__ == "__main__":
-    Flask.run(app)
+    Flask.run(app, debug=True)

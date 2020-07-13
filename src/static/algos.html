@@ -11,53 +11,60 @@
 
 <!-- Header -->
 <div class="fixed-header">
-  <div class="container">
-	<nav>
+    <div class="container">
+        <nav>
             <li><a href="#home" ><b>Algorithm Visualizer</b></a>
             <li style = "float:right"><a href="#projects" >Contacts</a>
             <li style = "float:right"><a href="#about" >About Us</a>
             <li style = "float:right"><a href="#contact" >Our Projects</a>
-	</nav>
+        </nav>
     </div>
-  </div>
+</div>
 
 
 <!-- Body -->
-<div style="background-image: url('../images/algoweb.jpg');">
+<div style="background-image: url('algoweb.jpg');">
 </div>
-<div id = "cy"></div>
-  <div class="bodytext"> Algorithm Visualizer
-  </div>
 
-<div class="submittext">
-  <form action="/action_page.php">
-    <div class="col-25">
-      <label for="V">Vertice</label>
-<br>
+<div class="bodytext" style=" width: 232px;">
+    <div class="title">
+        Algorithm Visualizer
+    </div>
 
-      <input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs...">
-<br>
-      <button class="button buttonV">Submit Vertice</button>
-<br>
-      <label for="E">Edge</label>
-<br>
-      <input type="text" id="W" name="Weight" placeholder="Enter Edge Weight...">
-<br>
-      <input type="text" id="S" name="Source" placeholder="Enter Edge Source...">
-<br>
-      <input type="text" id="T" name="Target" placeholder="Enter Edge Target...">
-<br>
-      <button class="button buttonE">Submit Edge</button>
-  </div>
-  </form>
+
+    <div class="submittext">
+        <form action="/action_page.php">
+            <div class="col-25">
+                	<label for="V">Vertice</label>
+                	<br>
+                	<input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs..." maxlength="12">
+			<br>
+      			<button class="button buttonV">Submit Vertice</button>
+			<br>
+      			<label for="E">Edge</label>
+			<br>
+      			<input type="text" id="W" name="Weight" placeholder="Enter Edge Weight..." min="0" max="99999">
+			<br>
+      			<input type="text" id="S" name="Source" placeholder="Enter Edge Source..." maxlength="12">
+			<br>
+      			<input type="text" id="T" name="Target" placeholder="Enter Edge Target..." maxlength="12">
+			<br>
+      			<button class="button buttonE">Submit Edge</button>
+		</div>
+        </form>
+    </div>
 </div>
+
+<sidegraph>
+    <div id="cy"> </div>
+</sidegraph>
 
 <div class="fixed-footer">
-	<div class="container"> 
-		<nav>
-			<li><b>Summer 2020 Algorithm Project</b>
-		</nav>
-	</div>
+    <div class="container">
+        <nav>
+            <li><b>Summer 2020 Algorithm Project</b>
+        </nav>
+    </div>
 </div>
 </body>
 </html>

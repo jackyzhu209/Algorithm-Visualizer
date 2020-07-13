@@ -69,6 +69,13 @@ function addvertex(){
     vlabel.value = "";
 
     var xhttps = new XMLHttpRequest();
+    xhttps.onreadystatechange = function(){
+        if(this.readyState === 4 && this.status === 200){
+            if(this.responseText !== "Pass"){
+                console.log(this.responseText);
+            }
+        }
+    };
     xhttps.open("POST", "/updateGraph");
     xhttps.send(json)
 }
