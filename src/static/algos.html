@@ -6,7 +6,31 @@
 <title>Algorithm Visualizer</title>
   <script type = application/javascript src = "cytoscape.js"></script>
   <script src = "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.1/cytoscape.min.js"></script>
+	
+<!--Error Check -->
+
+<script>
+function errorFunction(){
+	var num, text;
+	num = document.getElementById("W").valie;
+	if (isNaN(num) || x < 0 || x > 99999)
+	{
+		text = "Input a valid weight";
+	}
+	document.getElementById("error").innerHTML = text;
+}
+function verticeFunction(){
+	var v = document.forms["Vertice"].value;
+	if (v == "")
+	{
+	alert("Please enter a vertices");
+	return false;
+	}
+}
+</script>
+	
 </head>
+	
 <body onload = cyto()>
 
 <!-- Header -->
@@ -23,7 +47,7 @@
 
 
 <!-- Body -->
-<div style="background-image: url('algoweb.jpg');">
+<div style="background-image: url('../images/algoweb.jpg');">
 </div>
 
 <div class="bodytext" style=" width: 232px;">
@@ -33,15 +57,16 @@
 
 
     <div class="submittext">
-        <form action="/action_page.php">
+        <form>
             <div class="col-25">
-                	<label for="V">Vertice</label>
+                	<label for="V" style="padding-top: 1px;">Vertice</label>
                 	<br>
                 	<input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs..." maxlength="12">
 			<br>
-      			<button class="button buttonV">Submit Vertice</button>
+      			<button class="button buttonV" onclick = addvertex() onsubmit="return verticeFunction()">Submit Vertice</button>
 			<br>
-      			<label for="E">Edge</label>
+		    	<br>
+      			<label for="E" style="padding-top: 1px;">Edge</label>
 			<br>
       			<input type="text" id="W" name="Weight" placeholder="Enter Edge Weight..." min="0" max="99999">
 			<br>
@@ -49,7 +74,9 @@
 			<br>
       			<input type="text" id="T" name="Target" placeholder="Enter Edge Target..." maxlength="12">
 			<br>
-      			<button class="button buttonE">Submit Edge</button>
+      			<button class="button buttonE" onclick = addedge() onclick="errorFunction()">Submit Edge</button>
+		    	<br>
+		    	<p id="error" style="margin-top: 0px; margin-bottom: 0px; height: 40px;"></p>
 		</div>
         </form>
     </div>
