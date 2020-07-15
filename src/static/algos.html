@@ -63,6 +63,8 @@ function verticeFunction(){
                 	<br>
                 	<input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs..." maxlength="12">
 			<br>
+		    	<div class="errorArea">
+      			</div>
       			<button class="button buttonV" onclick = addvertex() onsubmit="return verticeFunction()">Submit Vertice</button>
 			<br>
 		    	<br>
@@ -74,6 +76,8 @@ function verticeFunction(){
 			<br>
       			<input type="text" id="T" name="Target" placeholder="Enter Edge Target..." maxlength="12">
 			<br>
+		    	<div class="errorArea">
+	      		</div>
       			<button class="button buttonE" onclick = addedge() onclick="errorFunction()">Submit Edge</button>
 		    	<br>
 		    	<p id="error" style="margin-top: 0px; margin-bottom: 0px; height: 40px;"></p>
