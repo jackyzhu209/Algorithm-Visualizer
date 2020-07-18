@@ -59,13 +59,22 @@ function verticeFunction(){
     <div class="submittext">
         <form>
             <div class="col-25">
-                	<label for="V" style="padding-top: 1px;">Vertice</label>
+		    	<label for="Algorithm" style="padding-top: 1px;">Select Algorithm</label>
+      			<select id="Algorithm" name="Algorithm">
+			<option value="BFS">Breadth First Search</option>
+			<option value="DFS">Depth First Search</option>
+			<option value="Dijkstra">Dijkstra's Algorithm</option>
+      			</select>
+			<br>
+			<button class="button buttonA">Submit Algorithm</button>
+			<br>
+                	<label for="V" style="padding-top: 1px;">Vertex</label>
                 	<br>
-                	<input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs..." maxlength="12">
+                	<input type="text" id="V" name="Vertice" placeholder="Enter Vertex IDs..." maxlength="12">
 			<br>
 		    	<div class="errorArea">
       			</div>
-      			<button class="button buttonV" onclick = addvertex() onsubmit="return verticeFunction()">Submit Vertice</button>
+      			<button class="button buttonV" onclick = addvertex() onsubmit="return verticeFunction()">Submit Vertex</button>
 			<br>
 		    	<br>
       			<label for="E" style="padding-top: 1px;">Edge</label>
