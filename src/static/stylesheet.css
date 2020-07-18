@@ -121,6 +121,9 @@ input[type=submit]:hover {
 	background-color: #4CAF50;
 }
 
+.buttonA {
+	background-color: #4CAF50;
+}
 
 nav {
 	list-style-type: none;
