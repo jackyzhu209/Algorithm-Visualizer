@@ -1,5 +1,5 @@
 	body{
-	background-image: url('algoweb.jpg');
+	background-image: url('../images/algoweb.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
@@ -8,11 +8,16 @@
 }
 sidegraph{
 	float: right;
-	width: 1105px;
-	height: 475px;
+	width: 78%;
+	height: 530px;
 	padding: 10px;
 	margin: 10px;
 	background-color: #4CAF50;
+}
+.errorArea{
+	width: 150px;
+	height: 20px;
+	padding: 5px;
 }
 .container{
 	width: 90%;
@@ -56,6 +61,8 @@ input[type=text], select, textarea {
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	resize: vertical;
 }
 
@@ -102,7 +109,7 @@ input[type=submit]:hover {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 14px;
-	margin: 2px 0px;
+	margin: 10px 0px;
 	cursor: pointer;
 }
 
@@ -114,6 +121,9 @@ input[type=submit]:hover {
 	background-color: #4CAF50;
 }
 
+.buttonA {
+	background-color: #4CAF50;
+}
 
 nav {
 	list-style-type: none;
