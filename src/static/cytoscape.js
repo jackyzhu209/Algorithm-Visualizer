@@ -1,5 +1,10 @@
 var cy;
 
+function newGraph(){
+    var https = new XMLHttpRequest();
+    https.open("POST", "/newGraph");
+    https.send();
+}
 function cyto(){
     cy = cytoscape({
         container: document.getElementById('cy'),
@@ -40,19 +45,28 @@ function cyto(){
 }
 
 function addedge(){
-    var elabel = document.getElementById('E');
+    var elabel = document.getElementById('W');
     var esource = document.getElementById('S');
     var etarget = document.getElementById('T');
 
     var json = JSON.stringify({"Type": "E", "data": {"id": elabel.value, "source": esource.value, "target": etarget.value}});
 
-    cy.add({group: 'edges', data: {id: elabel.value, source: esource.value, target: etarget.value}});
+    var xhttps = new XMLHttpRequest();
+    xhttps.onreadystatechange = function(){
+        if(this.readyState === 4){
+            if(this.responseText !== "Pass"){
+                document.getElementById("error").innerText = this.responseText
+            }
+            else{
+                cy.add({group: 'edges', data: {id: esource.value + "-" + etarget.value, source: esource.value, target: etarget.value, weight: elabel.value}});
 
-    elabel.value = "";
-    esource.value = "";
-    etarget.value = "";
-
-    var xhttps = new XMLHttpRequest()
+                elabel.value = "";
+                esource.value = "";
+                etarget.value = "";
+                document.getElementById("error").innerText = "";
+            }
+        }
+    };
     xhttps.open("POST", '/updateGraph');
     xhttps.send(json)
 }
@@ -64,20 +78,21 @@ function addvertex(){
 
     console.log(json);
 
-    cy.add({group: "nodes", data: {id: vlabel.value}});
-
-    vlabel.value = "";
-
     var xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function(){
-        if(this.readyState === 4 && this.status === 200){
+        if(this.readyState === 4){
             if(this.responseText !== "Pass"){
-                console.log(this.responseText);
+                document.getElementById("error").innerText = this.responseText
+            }
+            else{
+                cy.add({group: "nodes", data: {id: vlabel.value}});
+                vlabel.value = "";
+                document.getElementById("error").innerText = ""
             }
         }
     };
     xhttps.open("POST", "/updateGraph");
-    xhttps.send(json)
+    xhttps.send(json);
 }
 
 

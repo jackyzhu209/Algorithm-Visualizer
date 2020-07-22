@@ -26,5 +26,10 @@ def update():
     return Algorithms.updateGraph(data)
 
 
+@app.route('/newGraph', methods=['POST'])
+def newGraph():
+    return Algorithms.newGraph()
+
+
 if __name__ == "__main__":
-    Flask.run(app, debug=True)
+    Flask.run(app, port=8080, debug=True)

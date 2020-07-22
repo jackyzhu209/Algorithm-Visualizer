@@ -3,18 +3,28 @@ import json
 import requests
 
 
-graph = [[0, 1], [1, 0]]
+graph = [[0, 1],[1, 0]]
 vertexNumber = {"a": 0, "b" : 1}  # in the format "id" -> number
 vertexNames = {0 : "a", 1 : "b"}  # in the format number -> "id"
-addedVertices = set()
+addedVertices = {"a", "b"}
 # need first dictionary to keep the graph an adjacency matrix
+
+
+def newGraph():
+    global graph, vertexNames, vertexNumber, addedVertices
+    graph = [[0,1],[1,0]]
+    vertexNumber = {"a": 0, "b": 1}
+    vertexNames = {0: "a", 1: "b"}
+    addedVertices = {"a", "b"}
+    print(graph)
+    return "graphCleared"
 
 
 def updateGraph(data):
     parsed = json.loads(data)
     data = parsed["data"]
     status = "Pass"
-
+    print(str(graph) + " pre")
     if parsed["Type"] == "V":
         label = data["id"]
         if label not in addedVertices:
@@ -31,10 +41,14 @@ def updateGraph(data):
 
     elif parsed["Type"] == "E":
         label = data["id"]
-        if data["source"] and data["source"] in addedVertices:
+        if data["source"] and data["target"] in addedVertices:
             source = vertexNumber[data["source"]]
             target = vertexNumber[data["target"]]
-            graph[source][target] = label
+            if graph[source][target] == 0:
+                graph[source][target] = int(label)
+                graph[target][source] = int(label)
+            else:
+                status = "Duplicate Edge"
         else:
             if data["source"] not in addedVertices:
                 status = "Source Invalid"
@@ -42,11 +56,7 @@ def updateGraph(data):
                 status = "Target Invalid"
             else:
                 status = "Source and Target Invalid"
-
-    print(graph)
-    print(vertexNames.items())
-    print(data)
-
+    print(str(graph) + " post")
     return status
 
 

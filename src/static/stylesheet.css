@@ -9,7 +9,7 @@
 sidegraph{
 	float: right;
 	width: 78%;
-	height: 530px;
+	height: 830px;
 	padding: 10px;
 	margin: 10px;
 	background-color: #4CAF50;
@@ -149,6 +149,6 @@ li a {
 	line-height: 200px;
 }
 #cy{
-    	height: 425px;
-   	    width: 500px;
+    	height: 100%;
+   	    width: 100%;
 	}
