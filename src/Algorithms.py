@@ -1,6 +1,5 @@
 import heapq
 import json
-import requests
 
 
 graph = [[0, 1],[1, 0]]
