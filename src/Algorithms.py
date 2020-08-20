@@ -15,7 +15,6 @@ def newGraph():
     vertexNumber = {"a": 0, "b": 1}
     vertexNames = {0: "a", 1: "b"}
     addedVertices = {"a", "b"}
-    print(graph)
     return "graphCleared"
 
 
@@ -23,7 +22,6 @@ def updateGraph(data):
     parsed = json.loads(data)
     data = parsed["data"]
     status = "Pass"
-    print(str(graph) + " pre")
     if parsed["Type"] == "V":
         label = data["id"]
         if label not in addedVertices:
@@ -40,7 +38,9 @@ def updateGraph(data):
 
     elif parsed["Type"] == "E":
         label = data["id"]
-        if data["source"] and data["target"] in addedVertices:
+        print(data["source"])
+        print(data["target"])
+        if data["source"] in addedVertices and data["target"] in addedVertices:
             source = vertexNumber[data["source"]]
             target = vertexNumber[data["target"]]
             if graph[source][target] == 0:
@@ -49,12 +49,12 @@ def updateGraph(data):
             else:
                 status = "Duplicate Edge"
         else:
-            if data["source"] not in addedVertices:
+            if data["source"] not in addedVertices and data["target"] not in addedVertices:
+                status = "Source and Target Invalid"
+            elif data["source"] not in addedVertices:
                 status = "Source Invalid"
             elif data["target"] not in addedVertices:
                 status = "Target Invalid"
-            else:
-                status = "Source and Target Invalid"
     print(str(graph) + " post")
     return status
 
@@ -102,3 +102,19 @@ def dijkstras(graph, startNode, endNode):
         currNode = parents[currNode]
         path.append(currNode)
     return path
+
+
+def runAlgorithm(data):
+    parsed = json.loads(data)
+    algo = parsed["Algo"]
+    start = parsed["Start"]
+    end = parsed["End"]
+    if algo == "BFS":
+        print("BFS")
+    elif algo == "DFS":
+        print(algo)
+        depthfirstsearch(graph, start, end)
+    elif algo == "Dijkstra":
+        print(algo)
+        dijkstras(graph, start, end)
+    return "done"

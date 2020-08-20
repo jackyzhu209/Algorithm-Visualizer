@@ -31,5 +31,11 @@ def newGraph():
     return Algorithms.newGraph()
 
 
+@app.route('/runAlgo', methods=['POST'])
+def runAlgo():
+    data = request.data
+    print(data)
+    return Algorithms.runAlgorithm(data)
+
 if __name__ == "__main__":
     Flask.run(app, debug=True)

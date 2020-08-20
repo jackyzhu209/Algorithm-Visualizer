@@ -21,7 +21,7 @@ function cyto(){
             ],
             edges: [
                 {
-                    data: {id: 'a-b', source: 'a', target: 'b'},
+                    data: {id: 'a-b', source: 'a', target: 'b' ,weight: 1},
                 }
             ]
         },
@@ -33,7 +33,17 @@ function cyto(){
             {
                 selector: 'node',
                 style: {
-                    'label': 'data(id)'
+                    'label': 'data(id)',
+                    'color' : 'white',
+                    'background-color': 'blue'
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'label': 'data(weight)',
+                    'color' : 'white',
+                    'line-color': 'blue'
                 }
             }
         ],
@@ -95,4 +105,16 @@ function addvertex(){
     xhttps.send(json);
 }
 
+function runAlgo(){
+    var selectedAlgo = document.getElementById("Algorithm").value;
+    var start = document.getElementById("startNode").value;
+    var end = document.getElementById("endNode").value;
+    var json = JSON.stringify({"Algo": selectedAlgo, "Start": start, "End": end});
+    console.log(json);
+    var xhttps = new XMLHttpRequest();
+    xhttps.open("POST", '/runAlgo');
+    xhttps.send(json);
 
+    document.getElementById("startNode").value = "";
+    document.getElementById("endNode").value = "";
+}
