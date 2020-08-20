@@ -150,4 +150,4 @@ def runAlgorithm(data):
     elif algo == "Dijkstra":
         print(algo)
         dijkstras(graph, start, end)
-    return "done"
+    return "finished"
