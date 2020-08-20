@@ -55,6 +55,27 @@ def updateGraph(data):
                 status = "Source Invalid"
             elif data["target"] not in addedVertices:
                 status = "Target Invalid"
+            else:
+                status = "Source and Target Invalid"
+
+    elif parsed["Type"] == "Algorithms":
+        label = data["id"]
+        if data["startNode"] and data["endNode"] in addedVertices:
+            start = vertexNumber[data["startNode"]]
+            end = vertexNumber[data["endNode"]]
+            if graph[start][end] == 0:
+                graph[start][end] = int(label)
+                graph[end][start] = int(label)
+            else:
+                status = "Duplicate Edge"
+        else:
+            if data["startNode"] not in addedVertices:
+                status = "Start Node Invalid"
+            elif data["endNode"] not in addedVertices:
+                status = "End Node Invalid"
+            else:
+                status = "Start and End Node Invalid"
+
     print(str(graph) + " post")
     return status
 
@@ -70,6 +91,18 @@ def depthfirstsearch(graph, startNode, endNode):
                 visited.add(edges)
                 stack.append(edges)
                 path.append(edges)
+    return path
+
+
+def breadthfirstsearch(graph, startNode, endNode):
+    queue = [(startNode, [startNode])]
+    while queue:
+        (vertex, path) = queue.pop(0)
+        for next in graph[vertex] - set(path):
+            if next == endNode:
+                yield path + [next]
+            else:
+                queue.append((next, path + [next]))
     return path
 
 
