@@ -41,16 +41,6 @@
         <form>
             <div class="col-25">
 
-                <label for="Algorithm" style="padding-top: 1px;">Select Algorithm</label>
-                <select id="Algorithm" name="Algorithm">
-                    <option value="BFS">Breadth First Search</option>
-                    <option value="DFS">Depth First Search</option>
-                    <option value="Dijkstra">Dijkstra's Algorithm</option>
-                </select>
-                <br>
-                <button class="button buttonA">Submit Algorithm</button>
-                <br>
-
                 <label for="V" style="padding-top: 1px;">Vertice</label>
                 	<br>
                 	<input type="text" id="V" name="Vertice" placeholder="Enter Vertice IDs..." maxlength="12">
@@ -68,6 +58,18 @@
 			<br>
       			<button type = "button" class="button buttonE" onclick = addedge()>Submit Edge</button>
 		    	<br>
+		    	<label for="Algorithm" style="padding-top: 1px;">Select Algorithm</label>
+		    	<input type="text" id="startNode" name="StartNode" placeholder="Enter Starting Node..." maxlength="12">
+                	<br>
+                	<input type="text" id="endNode" name="EndNode" placeholder="Enter Ending Node..." maxlength="12">
+                	<select id="Algorithm" name="Algorithm">
+                    	<option value="BFS">Breadth First Search</option>
+                    	<option value="DFS">Depth First Search</option>
+                    	<option value="Dijkstra">Dijkstra's Algorithm</option>
+                	</select>
+                	<br>
+                	<button class="button buttonA">Submit Algorithm</button>
+                	<br>
 		    	<p id="error" style="margin-top: 0px; margin-bottom: 0px; height: 40px;"></p>
 		</div>
         </form>
