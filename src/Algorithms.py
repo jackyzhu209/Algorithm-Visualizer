@@ -55,6 +55,25 @@ def updateGraph(data):
                 status = "Target Invalid"
             else:
                 status = "Source and Target Invalid"
+                
+    elif parsed["Type"] == "Algorithms":
+        label = data["id"]
+        if data["startNode"] and data["endNode"] in addedVertices:
+            start = vertexNumber[data["startNode"]]
+            end = vertexNumber[data["endNode"]]
+            if graph[start][end] == 0:
+                graph[start][end] = int(label)
+                graph[end][start] = int(label)
+            else:
+                status = "Duplicate Edge"
+        else:
+            if data["startNode"] not in addedVertices:
+                status = "Start Node Invalid"
+            elif data["endNode"] not in addedVertices:
+                status = "End Node Invalid"
+            else:
+                status = "Start and End Node Invalid"
+    
     print(str(graph) + " post")
     return status
 
