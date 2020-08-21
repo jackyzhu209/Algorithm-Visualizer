@@ -97,7 +97,7 @@ function addvertex(){
             else{
                 cy.add({group: "nodes", data: {id: vlabel.value}});
                 vlabel.value = "";
-                document.getElementById("error").innerText = ""
+                document.getElementById("error").innerText = "";
             }
         }
     };
@@ -112,6 +112,19 @@ function runAlgo(){
     var json = JSON.stringify({"Algo": selectedAlgo, "Start": start, "End": end});
     console.log(json);
     var xhttps = new XMLHttpRequest();
+
+    xhttps.onreadystatechange = function(){
+            if(this.readyState === 4){
+                if(this.responseText !== "Pass"){
+                    document.getElementById("error").innerText = this.responseText
+                }
+                else{
+                    document.getElementById("startNode").value = "";
+                    document.getElementById("endNode").value = "";
+                    document.getElementById("error").innerText = "";
+                }
+            }
+        };
     xhttps.open("POST", '/runAlgo');
     xhttps.send(json);
 

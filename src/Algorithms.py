@@ -58,24 +58,6 @@ def updateGraph(data):
             else:
                 status = "Source and Target Invalid"
 
-    elif parsed["Type"] == "Algorithms":
-        label = data["id"]
-        if data["startNode"] and data["endNode"] in addedVertices:
-            start = vertexNumber[data["startNode"]]
-            end = vertexNumber[data["endNode"]]
-            if graph[start][end] == 0:
-                graph[start][end] = int(label)
-                graph[end][start] = int(label)
-            else:
-                status = "Duplicate Edge"
-        else:
-            if data["startNode"] not in addedVertices:
-                status = "Start Node Invalid"
-            elif data["endNode"] not in addedVertices:
-                status = "End Node Invalid"
-            else:
-                status = "Start and End Node Invalid"
-
     print(str(graph) + " post")
     return status
 
@@ -142,12 +124,21 @@ def runAlgorithm(data):
     algo = parsed["Algo"]
     start = parsed["Start"]
     end = parsed["End"]
-    if algo == "BFS":
-        print("BFS")
-    elif algo == "DFS":
-        print(algo)
-        depthfirstsearch(graph, start, end)
-    elif algo == "Dijkstra":
-        print(algo)
-        dijkstras(graph, start, end)
-    return "finished"
+    status = "Pass"
+
+    if start not in addedVertices and end not in addedVertices:
+        status = "Start and End Node Invalid"
+    elif start not in addedVertices:
+        status = "Start Node Invalid"
+    elif end not in addedVertices:
+        status = "End Node Invalid"
+    elif start and end in addedVertices:
+        if algo == "BFS":
+            print("BFS")
+        elif algo == "DFS":
+            print(algo)
+            depthfirstsearch(graph, start, end)
+        elif algo == "Dijkstra":
+            print(algo)
+            dijkstras(graph, start, end)
+    return status

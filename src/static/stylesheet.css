@@ -9,11 +9,12 @@
 sidegraph{
 	float: right;
 	width: 78%;
-	height: 830px;
+	height: 775px;
 	padding: 10px;
 	margin: 10px;
 	background-color: #4CAF50;
 }
+
 .errorArea{
 	width: 150px;
 	height: 20px;
