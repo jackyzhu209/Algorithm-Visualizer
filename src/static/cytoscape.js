@@ -21,7 +21,10 @@ function cyto(){
             ],
             edges: [
                 {
-                    data: {id: 'a-b', source: 'a', target: 'b' ,weight: 1},
+                    data: {id: 'a-b', source: 'a', target: 'b', weight: 1},
+                },
+                {
+                    data: {id: 'b-a', source: 'b', target: 'a', weight: 1}
                 }
             ]
         },
@@ -68,8 +71,8 @@ function addedge(){
                 document.getElementById("error").innerText = this.responseText
             }
             else{
-                cy.add({group: 'edges', data: {id: esource.value + "-" + etarget.value, source: esource.value, target: etarget.value, weight: elabel.value}});
-
+                cy.add({group: 'edges', data: {id: esource.value + "-" + etarget.value, source: esource.value, target: etarget.value, weight: parseInt(elabel.value)}});
+                cy.add({group: 'edges', data: {id: etarget.value + "-" + esource.value, source: etarget.value, target: esource.value, weight: parseInt(elabel.value)}});
                 elabel.value = "";
                 esource.value = "";
                 etarget.value = "";
@@ -114,11 +117,24 @@ function runAlgo(){
     var xhttps = new XMLHttpRequest();
 
     xhttps.onreadystatechange = function(){
+        var parsed = JSON.parse(this.responseText)["result"];
             if(this.readyState === 4){
-                if(this.responseText !== "Pass"){
-                    document.getElementById("error").innerText = this.responseText
+                if(typeof parsed == "string"){
+                    if(parsed === "not connected"){
+                        document.getElementById("Connectivity").innerText = parsed
+                    }
+                    else{
+                        document.getElementById("error").innerText = this.responseText;
+                    }
                 }
                 else{
+                    for(var node = 1; node < parsed.length; node ++){
+                        var id = "#"+parsed[node-1].toString() + "-" + parsed[node].toString();
+                        var id2 = "#"+parsed[node].toString() + "-" + parsed[node-1].toString();
+                        cy.$(id).style('line-color', 'red')
+                        cy.$(id2).style('line-color', 'red')
+                    }
+                    document.getElementById("Path").innerText = parsed.toString();
                     document.getElementById("startNode").value = "";
                     document.getElementById("endNode").value = "";
                     document.getElementById("error").innerText = "";

@@ -38,8 +38,6 @@ def updateGraph(data):
 
     elif parsed["Type"] == "E":
         label = data["id"]
-        print(data["source"])
-        print(data["target"])
         if data["source"] in addedVertices and data["target"] in addedVertices:
             source = vertexNumber[data["source"]]
             target = vertexNumber[data["target"]]
@@ -57,35 +55,51 @@ def updateGraph(data):
                 status = "Target Invalid"
             else:
                 status = "Source and Target Invalid"
-
-    print(str(graph) + " post")
     return status
 
 
 def depthfirstsearch(graph, startNode, endNode):
-    stack = []
-    visited = set([])
-    path = []
+    stack = [startNode]
+    visited = set([startNode])
+    path = [startNode]
     while len(stack) != 0:
         top = stack.pop()
-        for edges in graph[top]:
-            if edges not in visited:
-                visited.add(edges)
-                stack.append(edges)
-                path.append(edges)
+        if top not in visited:
+            visited.add(top)
+            for edges in range(0, len(graph)):
+                if graph[top][edges] != 0:
+                    stack.append(edges)
+                    path.append(edges)
     return path
+
 
 
 def breadthfirstsearch(graph, startNode, endNode):
-    queue = [(startNode, [startNode])]
-    while queue:
-        (vertex, path) = queue.pop(0)
-        for next in graph[vertex] - set(path):
-            if next == endNode:
-                yield path + [next]
-            else:
-                queue.append((next, path + [next]))
-    return path
+    start = vertexNumber[startNode]
+    end = vertexNumber[endNode]
+    queue = [start]
+    visited = set([start])
+    parents = {}
+    path = []
+
+    while len(queue) != 0:
+        popped = queue.pop(0)
+        if popped != end:
+            for neighbors in range(0, len(graph)):
+                if graph[popped][neighbors] != 0 and neighbors not in visited:
+                    visited.add(neighbors)
+                    parents[neighbors] = popped
+                    queue.append(neighbors)
+        else:
+            path.append(vertexNames[end])
+            currNode = end
+            while currNode != start:
+                path.append(vertexNames[parents[currNode]])
+                currNode = parents[currNode]
+            path.reverse()
+            print(path)
+            return {"result": path}
+    return {"result": "not connected"}
 
 
 def dijkstras(graph, startNode, endNode):
@@ -96,7 +110,7 @@ def dijkstras(graph, startNode, endNode):
     parents[startNode] = "START"
     path = []
     priorityqueue = heapq.heapify([])
-    for vertices in graph.keys():
+    for vertices in range(0,len(graph)):
         if vertices != startNode:
             distance[vertices] = float("inf")
         heapq.heappush(priorityqueue, (vertices, distance[vertices]))
@@ -105,7 +119,7 @@ def dijkstras(graph, startNode, endNode):
         top = heapq.heappop(priorityqueue)[0]
         for neighbors in range(0, len(graph)):
             if neighbors != top:
-                check = graph[neighbors] + distance[neighbors]
+                check = graph[neighbors][top] + distance[neighbors]
                 if check > distance[neighbors]:
                     distance[neighbors] = check
                     parents[neighbors] = top
@@ -116,7 +130,8 @@ def dijkstras(graph, startNode, endNode):
     while currNode != startNode:
         currNode = parents[currNode]
         path.append(currNode)
-    return path
+    path.reverse()
+    return {"result": path}
 
 
 def runAlgorithm(data):
@@ -124,21 +139,19 @@ def runAlgorithm(data):
     algo = parsed["Algo"]
     start = parsed["Start"]
     end = parsed["End"]
-    status = "Pass"
-
+    status = ""
+    print(graph)
     if start not in addedVertices and end not in addedVertices:
-        status = "Start and End Node Invalid"
+        status = {"result": "Start and End Node Invalid"}
     elif start not in addedVertices:
-        status = "Start Node Invalid"
+        status = {"result": "Start Node Invalid"}
     elif end not in addedVertices:
-        status = "End Node Invalid"
+        status = {"result": "End Node Invalid"}
     elif start and end in addedVertices:
         if algo == "BFS":
-            print("BFS")
+            status = breadthfirstsearch(graph, start, end)
         elif algo == "DFS":
-            print(algo)
-            depthfirstsearch(graph, start, end)
+            status = depthfirstsearch(graph, start, end)
         elif algo == "Dijkstra":
-            print(algo)
-            dijkstras(graph, start, end)
-    return status
+            status = dijkstras(graph, start, end)
+    return json.dumps(status)
