@@ -120,6 +120,8 @@ function runAlgo(){
         var parsed = JSON.parse(this.responseText)["result"];
             if(this.readyState === 4){
                 if(typeof parsed == "string"){
+                    document.getElementById("Connectivity").innerText = "";
+                    document.getElementById("Path").innerText = "";
                     if(parsed === "not connected"){
                         document.getElementById("Connectivity").innerText = parsed
                     }
@@ -128,12 +130,14 @@ function runAlgo(){
                     }
                 }
                 else{
+                    document.getElementById("Path").innerText = "";
                     for(var node = 1; node < parsed.length; node ++){
                         var id = "#"+parsed[node-1].toString() + "-" + parsed[node].toString();
                         var id2 = "#"+parsed[node].toString() + "-" + parsed[node-1].toString();
                         cy.$(id).style('line-color', 'red')
                         cy.$(id2).style('line-color', 'red')
                     }
+                    document.getElementById("Connectivity").innerText = "connected";
                     document.getElementById("Path").innerText = parsed.toString();
                     document.getElementById("startNode").value = "";
                     document.getElementById("endNode").value = "";
