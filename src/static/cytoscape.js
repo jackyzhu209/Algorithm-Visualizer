@@ -130,7 +130,9 @@ function runAlgo(){
                     }
                 }
                 else{
+                    console.log(parsed)
                     document.getElementById("Path").innerText = "";
+                    cy.edges().style('line-color', 'blue');
                     for(var node = 1; node < parsed.length; node ++){
                         var id = "#"+parsed[node-1].toString() + "-" + parsed[node].toString();
                         var id2 = "#"+parsed[node].toString() + "-" + parsed[node-1].toString();

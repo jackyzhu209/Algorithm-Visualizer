@@ -103,33 +103,36 @@ def breadthfirstsearch(graph, startNode, endNode):
 
 
 def dijkstras(graph, startNode, endNode):
+    start = vertexNumber[startNode]
+    end = vertexNumber[endNode]
     distance = dict()
-    distance[startNode] = 0
-    explored = set()
+    distance[start] = 0
+    explored = set([start])
     parents = dict()
-    parents[startNode] = "START"
+    parents[start] = "START"
     path = []
-    priorityqueue = heapq.heapify([])
+    priorityqueue = [(0, start)]
+    heapq.heapify(priorityqueue)
     for vertices in range(0,len(graph)):
-        if vertices != startNode:
+        if vertices != start:
             distance[vertices] = float("inf")
-        heapq.heappush(priorityqueue, (vertices, distance[vertices]))
 
     while len(priorityqueue) != 0:
-        top = heapq.heappop(priorityqueue)[0]
+        tdist, top = heapq.heappop(priorityqueue)
         for neighbors in range(0, len(graph)):
-            if neighbors != top:
-                check = graph[neighbors][top] + distance[neighbors]
-                if check > distance[neighbors]:
+            if neighbors != top and graph[neighbors][top] != 0:
+                check = graph[neighbors][top] + distance[top]
+                if check < distance[neighbors]:
                     distance[neighbors] = check
                     parents[neighbors] = top
                 if neighbors not in explored:
-                    heapq.heappush(priorityqueue, (neighbors, distance[neighbors]))
-    currNode = endNode
-    path.append(currNode)
-    while currNode != startNode:
+                    heapq.heappush(priorityqueue, (distance[neighbors], neighbors))
+                explored.add(neighbors)
+    currNode = end
+    path.append(vertexNames[currNode])
+    while currNode != start:
         currNode = parents[currNode]
-        path.append(currNode)
+        path.append(vertexNames[currNode])
     path.reverse()
     return {"result": path}
 
@@ -153,5 +156,10 @@ def runAlgorithm(data):
         elif algo == "DFS":
             status = depthfirstsearch(graph, start, end)
         elif algo == "Dijkstra":
-            status = dijkstras(graph, start, end)
+            result = breadthfirstsearch(graph, start, end)
+            if(result != {"result": "not connected"}):
+                status = dijkstras(graph, start, end)
+            else:
+                status = {"result": "not connected"}
+    print(status)
     return json.dumps(status)
